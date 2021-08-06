@@ -1,6 +1,31 @@
 #include "salesClass.h"
 int main() {
-
+    Sales_data nextSales("cal-9Ed",12,4.0),firstSales("math-0x");//use your constructor
+    std::cout<<"First sales \t: " <<firstSales.bookNo<<std::endl;
+    std::cout<<"Sales name\t"<<nextSales.bookNo<<"\n"<<"Unit sold\t:"<<nextSales.unit_solds<<"\n"<<"reveneu\t:"<<nextSales.revenue<<std::endl;
+    std::cout<<"test default constructor \n";
+    Sales_data defaulConst;
+    std::cout<<"Sales name\t"<<defaulConst.bookNo<<"\n"<<"Unit sold\t:"<<defaulConst.unit_solds<<"\n"<<"reveneu\t:"<<defaulConst.revenue<<std::endl;
+    std::cout<<"use your combine ..."<<std::endl;
+    Sales_data letsCombine("Discrete-3Ed",13,89.09);
+    std::cout<<"Combine first sales dat to the second sales "<<std::endl;
+    letsCombine.combine(nextSales);
+    std::cout<<"After combine \t:"<<std::endl;
+    std::cout<<"Sales name\t"<<letsCombine.bookNo<<"\n"<<"Unit sold\t:"<<letsCombine.unit_solds<<"\n"<<"reveneu\t:"<<letsCombine.revenue<<std::endl;
+    std::cout<<"Evaluate it ..."<<std::endl;
+    if(nextSales.isbn()==letsCombine.isbn()){
+        std::cout<<"it's equal ...\n combine the total revenue and total sold ..."<<std::endl;
+        letsCombine.combine(nextSales);
+    }
+    else{
+        std::cout<<"different isbn number ....\n";
+        std::cout<<"1.isbn \t: " << nextSales.bookNo<<std::endl;
+        std::cout<<"2.isbn \t: " << letsCombine.bookNo<<std::endl;
+    }
+    std::cout<<"How it copied .... ?"<<std::endl;
+    nextSales=letsCombine;
+    std::cout<<"After copied ..."<<std::endl;
+    std::cout<<"Sales name\t"<<nextSales.bookNo<<"\n"<<"Unit sold\t:"<<nextSales.unit_solds<<"\n"<<"reveneu\t:"<<nextSales.revenue<<std::endl;
     return 0;
 }
 double Sales_data::avg_price()const{
@@ -30,4 +55,7 @@ Sales_data add(const Sales_data&lhs,const Sales_data&rhs){
     Sales_data sum=lhs;
     sum.combine(rhs);
     return sum;
+}
+Sales_data::Sales_data(std::istream &is) {
+    read(is,*this);
 }
