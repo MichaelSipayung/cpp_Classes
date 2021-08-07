@@ -41,4 +41,23 @@ private:
 Sales_data_1 add(const Sales_data_1&,const Sales_data_1&);
 std::istream &read(std::istream&,Sales_data_1&);
 std::ostream &print(std::ostream&,const Sales_data_1&);
+//additional class features
+class Screen{
+public:
+    typedef std::string::size_type pos;
+    Screen()=default;
+    Screen(pos ht,pos wd,char c):height(ht),width(wd),contents(ht*wd,c){}
+    char get()const{ //implicitly inline
+        return contents[cursor];
+    }
+    //mutable data member
+    void someMember()const;
+    inline char get(pos ht,pos wd)const; //explicitly inline
+    Screen &move(pos r , pos c);//can be made inline later
+private:
+    mutable  size_t access_ctr=0;
+    pos cursor=0;
+    pos height =0,width=0;
+    std::string contents;
+};
 #endif //CLASSES_SALESCLASS_H

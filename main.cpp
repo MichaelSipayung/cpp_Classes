@@ -26,6 +26,14 @@ int main() {
     nextSales=letsCombine;
     std::cout<<"After copied ..."<<std::endl;
     std::cout<<"Sales name\t"<<nextSales.bookNo<<"\n"<<"Unit sold\t:"<<nextSales.unit_solds<<"\n"<<"reveneu\t:"<<nextSales.revenue<<std::endl;
+    //test overloading
+    //use screen class
+    Screen myScreen;
+    char ch=myScreen.get();
+    std::cout<<"1.test overloading\t: "<<ch<<std::endl;
+    ch = myScreen.get(0,11);
+    std::cout<<"2.test overloading\t: "<<ch<<std::endl;
+    myScreen.someMember();
     return 0;
 }
 double Sales_data::avg_price()const{
@@ -58,4 +66,21 @@ Sales_data add(const Sales_data&lhs,const Sales_data&rhs){
 }
 Sales_data::Sales_data(std::istream &is) {
     read(is,*this);
+}
+//making member inline
+inline
+Screen &Screen::move(pos r, pos c) {
+    pos row=r*width;
+    cursor=row+c;
+    return *this;
+}
+char Screen::get(pos r,pos c) const {
+    pos row=r*width;
+    return  contents[row+c];
+}
+//...another test for different parameter
+void Screen::someMember() const {
+    ++access_ctr;
+    std::cout<<"How much the class called\t: "<<access_ctr<<std::endl;
+    std::cout<<"this function intended for apply mutable data member"<<std::endl;
 }
